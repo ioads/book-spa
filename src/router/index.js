@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import ListBook from '@/views/ListBook.vue';
+import CreateBook from '@/views/CreateBook.vue';
 import BaseLayout from '@/components/BaseLayout.vue';
 
 const routes = [
@@ -9,8 +10,13 @@ const routes = [
         children: [
             {
                 path: 'books',
-                name: 'Books',
+                name: 'ListBooks',
                 component: ListBook,
+            },
+            {
+                path: 'books/create',
+                name: 'CreateBook',
+                component: CreateBook,
             }
         ]
     },

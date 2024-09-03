@@ -15,7 +15,7 @@
             <td class="py-2 px-4 border-b">{{ book.title }}</td>
             <td class="py-2 px-4 border-b">{{ book.subtitle }}</td>
             <td class="py-2 px-4 border-b">{{ book.description }}</td>
-            <td class="py-2 px-4 border-b">{{ book.author }}</td>
+            <td class="py-2 px-4 border-b">{{ book.author ? book.author.name : '-'}}</td>
             <td class="py-2 px-4 border-b">{{ book.publication_year }}</td>
           </tr>
         </tbody>
