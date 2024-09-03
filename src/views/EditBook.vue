@@ -2,6 +2,16 @@
     <div class="w-full mb-8">
       <form @submit.prevent="updateBook" class="bg-white p-6 border border-gray-200 rounded-lg shadow-md">
         <div class="mb-4">
+          <label for="isbn" class="block text-sm font-medium text-gray-700">ISBN</label>
+          <input
+            v-model="book.isbn"
+            id="isbn"
+            type="text"
+            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            required
+          />
+        </div>
+        <div class="mb-4">
           <label for="title" class="block text-sm font-medium text-gray-700">Título</label>
           <input
             v-model="book.title"
@@ -135,6 +145,7 @@
             try {
                 const response = await api.get('/books/'+this.$route.params.id);
                 this.book.title = response.data.data.title;
+                this.book.isbn = response.data.data.isbn;
                 this.book.subtitle = response.data.data.subtitle;
                 this.book.publication_year = response.data.data.publication_year;
                 this.book.description = response.data.data.description;
