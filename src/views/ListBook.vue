@@ -4,6 +4,7 @@
         <thead>
           <tr>
             <th class="py-2 px-4 border-b">#</th>
+            <th class="py-2 px-4 border-b">ISBN</th>
             <th class="py-2 px-4 border-b">Título</th>
             <th class="py-2 px-4 border-b">Subtítulo</th>
             <th class="py-2 px-4 border-b">Descrição</th>
@@ -15,6 +16,7 @@
         <tbody>
           <tr v-for="(book, index) in books" :key="index">
             <td class="py-2 px-4 border-b">{{ index+1 }}</td>
+            <td class="py-2 px-4 border-b">{{ book.isbn }}</td>
             <td class="py-2 px-4 border-b">{{ book.title }}</td>
             <td class="py-2 px-4 border-b">{{ book.subtitle }}</td>
             <td class="py-2 px-4 border-b">{{ book.description }}</td>

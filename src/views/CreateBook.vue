@@ -2,6 +2,16 @@
     <div class="w-full mb-8">
       <form @submit.prevent="addBook" class="bg-white p-6 border border-gray-200 rounded-lg shadow-md">
         <div class="mb-4">
+          <label for="isbn" class="block text-sm font-medium text-gray-700">ISBN</label>
+          <input
+            v-model="newBook.isbn"
+            id="isbn"
+            type="text"
+            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            required
+          />
+        </div>
+        <div class="mb-4">
           <label for="title" class="block text-sm font-medium text-gray-700">Título</label>
           <input
             v-model="newBook.title"
@@ -118,6 +128,7 @@
     data() {
       return {
         newBook: {
+            isbn: '',
             title: '',
             subtitle: '',
             publication_year: '',
@@ -141,13 +152,11 @@
         addBook() {
             try {
               this.newBook.image = this.selectedFile
-              const response = api.post('/books', this.newBook, {
+              api.post('/books', this.newBook, {
                   headers: {
                     'Content-Type': 'multipart/form-data',
                   },
                 });
-
-                console.log(response)
             } catch (error) {
                 alert('Erro ao cadastrar o livro!');
             }
