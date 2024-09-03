@@ -1,11 +1,23 @@
 <template>
-  <div>
-    <h1>Livros</h1>
-    <ul>
-      <li v-for="book in books" :key="book.id">
-        {{ book.title }} by {{ book.author }}
-      </li>
-    </ul>
+  <div class="flex justify-center">
+    <div class="w-1/2">
+      <table class="min-w-full bg-white border border-gray-200">
+        <thead>
+          <tr>
+            <th class="py-2 px-4 border-b">Título</th>
+            <th class="py-2 px-4 border-b">Subtítulo</th>
+            <th class="py-2 px-4 border-b">Data da Publicação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(book, index) in books" :key="index">
+            <td class="py-2 px-4 border-b">{{ book.title }}</td>
+            <td class="py-2 px-4 border-b">{{ book.subtitle }}</td>
+            <td class="py-2 px-4 border-b">{{ book.publication_year }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
