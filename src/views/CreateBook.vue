@@ -108,10 +108,10 @@
     data() {
       return {
         newBook: {
-            title: 'teste',
-            subtitle: 'teste',
-            publication_year: '2008',
-            description: 'teste',
+            title: '',
+            subtitle: '',
+            publication_year: '',
+            description: '',
             author: {
                 name: '',
                 zip_code: '',
