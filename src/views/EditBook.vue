@@ -31,6 +31,11 @@
           />
         </div>
         <div class="mb-4">
+            <div v-if="this.book.image" class="mb-2">
+                <img :src="this.book.image" alt="Book Image" class="max-w-xs" style="max-width: 150px; max-height: 150px;"/>
+            </div>
+        </div>
+        <div class="mb-4">
           <label for="author" class="block text-sm font-medium text-gray-700">Descrição</label>
           <input
             v-model="book.description"
@@ -61,7 +66,7 @@
         <div class="mb-4">
           <label for="author" class="block text-sm font-medium text-gray-700">Endereço</label>
           <input
-            readonly
+            required
             v-model="book.author.address"
             id="author"
             type="text"
@@ -71,7 +76,7 @@
         <div class="mb-4">
           <label for="author" class="block text-sm font-medium text-gray-700">Cidade</label>
           <input
-            readonly
+            required
             v-model="book.author.city"
             id="author"
             type="text"
@@ -81,7 +86,7 @@
         <div class="mb-4">
           <label for="author" class="block text-sm font-medium text-gray-700">Estado</label>
           <input
-            readonly
+            required
             v-model="book.author.state"
             id="author"
             type="text"
@@ -138,6 +143,7 @@
                 this.book.author.address = response.data.data.author ? response.data.data.author.address : ''
                 this.book.author.city = response.data.data.author ? response.data.data.author.city : ''
                 this.book.author.state = response.data.data.author ? response.data.data.author.state : ''
+                this.book.image = response.data.data.image;
             } catch (error) {
             console.error('Erro ao buscar livros:', error);
             }

@@ -31,6 +31,16 @@
           />
         </div>
         <div class="mb-4">
+          <label for="title" class="block text-sm font-medium text-gray-700">Imagem</label>
+          <input
+            id="image"
+            type="file"
+            @change="handleFileChange"
+            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            required
+          />
+        </div>
+        <div class="mb-4">
           <label for="author" class="block text-sm font-medium text-gray-700">Descrição</label>
           <input
             v-model="newBook.description"
@@ -61,7 +71,7 @@
         <div class="mb-4">
           <label for="author" class="block text-sm font-medium text-gray-700">Endereço</label>
           <input
-            readonly
+            required
             v-model="newBook.author.address"
             id="author"
             type="text"
@@ -71,7 +81,7 @@
         <div class="mb-4">
           <label for="author" class="block text-sm font-medium text-gray-700">Cidade</label>
           <input
-            readonly
+            required
             v-model="newBook.author.city"
             id="author"
             type="text"
@@ -81,7 +91,7 @@
         <div class="mb-4">
           <label for="author" class="block text-sm font-medium text-gray-700">Estado</label>
           <input
-            readonly
+            required
             v-model="newBook.author.state"
             id="author"
             type="text"
@@ -125,10 +135,19 @@
     mounted() {
     },
     methods: {
+        handleFileChange(event) {
+          this.selectedFile = event.target.files[0];
+        },
         addBook() {
             try {
-                api.post('/books', this.newBook);
-                alert('Livro cadastrado com sucesso');
+              this.newBook.image = this.selectedFile
+              const response = api.post('/books', this.newBook, {
+                  headers: {
+                    'Content-Type': 'multipart/form-data',
+                  },
+                });
+
+                console.log(response)
             } catch (error) {
                 alert('Erro ao cadastrar o livro!');
             }
