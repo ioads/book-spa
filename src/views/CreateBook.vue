@@ -52,6 +52,7 @@
           <label for="author" class="block text-sm font-medium text-gray-700">CEP</label>
           <input
             v-model="newBook.author.zip_code"
+            @input="onCepInput"
             id="author"
             type="text"
             class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -113,10 +114,10 @@
             description: 'teste',
             author: {
                 name: '',
-                zip_code: '41720040',
-                address: 'teste',
-                city: 'teste',
-                state: 'teste'
+                zip_code: '',
+                address: '',
+                city: '',
+                state: ''
             },
         },
       };
@@ -131,6 +132,32 @@
             } catch (error) {
                 alert('Erro ao cadastrar o livro!');
             }
+        },
+        onCepInput() {
+          if (this.newBook.author.zip_code.replace(/\D/g, '').length === 8) {
+            this.searchCep();
+          }
+        },
+        async searchCep() {
+          try {
+            const cepFormatted = this.newBook.author.zip_code.replace(/\D/g, '');
+            if (cepFormatted.length !== 8) {
+              alert('CEP deve ter 8 dígitos.');
+              return;
+            }
+
+            const response = await api.get(`https://viacep.com.br/ws/${cepFormatted}/json/`);
+            if (response.data.erro) {
+              alert('CEP não encontrado.');
+              return;
+            }
+            
+            this.newBook.author.address = response.data.logradouro;
+            this.newBook.author.city = response.data.localidade;
+            this.newBook.author.state = response.data.estado;
+          } catch (error) {
+            alert('Ocorreu um erro ao buscar o CEP.');
+          }
         },
     },
   };
